@@ -1305,6 +1305,56 @@
     }
     .t-google-write:hover { opacity: 0.85; }
 
+    /* ── TOUR ── */
+    #tour {
+      background: var(--forest);
+      color: var(--white);
+      padding: 7rem 5rem;
+    }
+    .tour-inner {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    #tour .s-label { color: var(--gold); }
+    #tour .s-heading { color: var(--white); margin-top: 0.5rem; }
+    #tour .s-sub { color: rgba(255,255,255,0.58); margin-top: 1.2rem; max-width: 460px; }
+    .tour-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 2.2rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--forest);
+      background: var(--lime);
+      padding: 1rem 2.2rem;
+      border-radius: 2rem;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .tour-cta:hover { transform: translateY(-2px); opacity: 0.92; }
+    .tour-note { margin-top: 0.9rem; font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+    .tour-list { display: grid; gap: 0.75rem; }
+    .tour-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 0.9rem;
+      padding: 1.1rem 1.3rem;
+    }
+    .tour-item svg {
+      width: 20px; height: 20px; flex-shrink: 0;
+      fill: none; stroke: var(--lime);
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .tour-item b { display: block; font-size: 0.95rem; font-weight: 600; }
+    .tour-item span { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+
     /* ── INSTAGRAM ── */
     #instagram {
       background: var(--white);
@@ -1702,6 +1752,18 @@
     .d5 { transition-delay: 0.4s; }
 
     /* ── RESPONSIVE ── */
+    /* Medium screens: keep the nav on one line */
+    .nav-cta { white-space: nowrap; }
+    @media (max-width: 1280px) {
+      .nav-links { gap: 1.4rem; }
+      .nav-links a[href="#instagram"] { display: none; }
+    }
+    @media (max-width: 1080px) {
+      .nav-links { gap: 1rem; }
+      .nav-links a { letter-spacing: 0.06em; }
+      .nav-links a[href="#process"], .nav-links a[href="#about"] { display: none; }
+    }
+
     @media (max-width: 1100px) {
       .tech-inner { gap: 3.5rem; }
       .coach-photo-wrap { height: 280px; }
@@ -1839,6 +1901,10 @@
       .t-google-write { flex: 1; text-align: center; }
 
       /* INSTAGRAM */
+      #tour { padding: 3.5rem 1.25rem; }
+      .tour-inner { grid-template-columns: 1fr; gap: 2.2rem; }
+      #tour .s-heading { font-size: clamp(2rem, 8vw, 2.8rem); }
+      .tour-cta { display: flex; justify-content: center; }
       #instagram { padding: 3.5rem 1.25rem; }
       .ig-header { flex-direction: column; align-items: flex-start; gap: 0.9rem; }
       .ig-placeholder { grid-template-columns: repeat(2, 1fr); }
@@ -1906,6 +1972,7 @@
     <a href="#services">Services</a>
     <a href="#coaches">Coaches</a>
     <a href="#testimonials">Reviews</a>
+    <a href="#tour">Tour</a>
     <a href="#faq">FAQ</a>
     <a href="#book">Contact</a>
     <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=mobile-menu" target="_blank" rel="noopener" class="d-cta">Book a Lesson</a>
@@ -1922,6 +1989,7 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#coaches">Coaches</a></li>
       <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#tour">Tour</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#instagram">Instagram</a></li>
       <li><a href="#book">Contact</a></li>
@@ -2448,6 +2516,33 @@
     </div>
   </section>
 
+  <!-- TOUR -->
+  <section id="tour" aria-labelledby="tour-heading">
+    <div class="tour-inner">
+      <div class="reveal">
+        <span class="s-label">PS4U Golf Tour</span>
+        <h2 id="tour-heading" class="s-heading">Compete.<br/>Track every stop.</h2>
+        <p class="s-sub">Our local tour brings El Paso golfers together for competitive stops across the region. Follow live scores during each event, see where you stand for the season, and check the full roster.</p>
+        <a href="https://claude.ai/artifact/VrkXgzvJn73yQEXkBgnB9P" target="_blank" rel="noopener" class="tour-cta">Live Scores &amp; Standings →</a>
+        <p class="tour-note">Opens the live scoreboard in a new tab. Scores update in real time during each stop.</p>
+      </div>
+      <div class="tour-list reveal d2">
+        <div class="tour-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <div><b>Live leaderboard</b><span>Follow every stop as scores come in</span></div>
+        </div>
+        <div class="tour-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>
+          <div><b>Season standings</b><span>Points race across all tour stops</span></div>
+        </div>
+        <div class="tour-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <div><b>Stops &amp; roster</b><span>Upcoming events, courses, and players</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- INSTAGRAM -->
   <section id="instagram" aria-labelledby="ig-heading">
     <div class="ig-header reveal">
@@ -2617,6 +2712,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#coaches">Coaches</a></li>
+      <li><a href="#tour">Tour</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#book">Contact</a></li>
       <li><a href="https://perfectswing4u.square.site/" target="_blank" rel="noopener">Book Online</a></li>
@@ -2649,7 +2745,7 @@
     });
 
     /* Switch cursor color on dark sections */
-    const darkSections = document.querySelectorAll('#hero, #about, #technology, #book, footer');
+    const darkSections = document.querySelectorAll('#hero, #about, #technology, #tour, #book, footer');
     const cursorIO = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting && e.intersectionRatio > 0.4) {
