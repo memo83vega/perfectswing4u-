@@ -798,45 +798,105 @@
     /* ── PROCESS ── */
     #process {
       background: var(--white);
-      padding: 8rem 5rem;
+      padding: 5.5rem 5rem;
       border-top: 1px solid var(--border);
     }
     .process-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: end;
-      margin-bottom: 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+      margin-bottom: 2.6rem;
     }
+    .process-header .s-heading { font-size: clamp(2.2rem, 3.8vw, 3.2rem); }
+    .process-header .s-sub { max-width: 380px; }
     .process-steps {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
+      gap: 1rem;
+      counter-reset: step;
     }
-    .process-step { display: flex; flex-direction: column; gap: 1.2rem; }
+    .process-step {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      padding: 1.7rem 1.6rem 1.6rem;
+      border: 1px solid var(--line);
+      border-radius: 1.2rem;
+      background: var(--white);
+      transition: border-color 0.3s, box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+    }
+    .process-step:hover {
+      border-color: var(--forest);
+      box-shadow: 0 18px 44px -24px rgba(26,48,32,0.45);
+      transform: translateY(-4px);
+    }
+    /* Arrow connector between cards */
+    .process-step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -0.95rem;
+      top: 2.1rem;
+      width: 1.9rem; height: 1.9rem;
+      border-radius: 50%;
+      background: var(--forest);
+      color: var(--lime);
+      font-size: 0.85rem;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1;
+    }
+    .step-top { display: flex; align-items: center; justify-content: space-between; }
     .step-num {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 0.9;
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--forest);
+    }
+    .process-step:hover .step-num { color: var(--forest); }
+    .step-chip {
       font-family: var(--mono);
-      font-size: 0.72rem;
-      font-weight: 500;
+      font-size: 0.62rem;
       letter-spacing: 0.12em;
-      color: var(--muted);
+      text-transform: uppercase;
+      color: var(--forest);
+      background: rgba(26,48,32,0.07);
+      border-radius: 2rem;
+      padding: 0.32rem 0.7rem;
+      white-space: nowrap;
     }
     .step-title {
-      font-family: var(--serif);
-      font-size: 1.6rem;
-      font-weight: 600;
-      line-height: 1.15;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
       color: var(--text);
-    }
-    .step-line {
-      width: 32px; height: 1px;
-      background: var(--gold);
+      margin-top: 0.4rem;
     }
     .step-desc {
-      font-size: 0.87rem;
-      color: var(--muted);
-      line-height: 1.73;
+      font-size: 0.88rem;
+      color: #5F5F58;
+      line-height: 1.65;
     }
+    .process-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+      padding: 1.1rem 1.1rem 1.1rem 1.6rem;
+      border: 1px dashed var(--border);
+      border-radius: 1.2rem;
+    }
+    .process-cta p { font-size: 0.92rem; color: var(--text); }
+    .process-cta p span { color: var(--muted); }
+    .process-cta-actions { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+    .process-cta-actions .phone { font-size: 0.85rem; font-weight: 500; color: var(--forest); }
+    .process-cta .btn-solid { background: var(--forest); color: var(--white); }
+    .process-cta .btn-solid:hover { background: var(--forest2); }
 
     /* ── SERVICES ── */
     #services {
@@ -1931,9 +1991,13 @@
 
       /* PROCESS */
       #process { padding: 3rem 1.25rem 3.5rem; }
-      .process-header { grid-template-columns: 1fr; gap: 0.6rem; margin-bottom: 2rem; }
-      .process-header .s-heading { font-size: clamp(2rem, 8vw, 2.8rem); }
-      .process-steps { grid-template-columns: 1fr; gap: 1.75rem; }
+      .process-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; margin-bottom: 1.6rem; }
+      .process-header .s-heading { font-size: clamp(2rem, 8vw, 2.6rem); }
+      .process-steps { grid-template-columns: 1fr; gap: 1.1rem; }
+      .process-step:not(:last-child)::after { content: '↓'; right: auto; left: 1.6rem; top: auto; bottom: -1.05rem; }
+      .process-cta { flex-direction: column; align-items: stretch; text-align: center; padding: 1.2rem; }
+      .process-cta-actions { flex-direction: column; gap: 0.7rem; }
+      .process-cta .btn-solid { text-align: center; }
 
       /* SERVICES */
       #services { padding: 3rem 1.25rem 3.5rem; }
@@ -2299,29 +2363,33 @@
   <section id="process" aria-labelledby="process-heading">
     <div class="process-header">
       <div class="reveal">
-        <span class="s-label">The Process</span>
-        <h2 id="process-heading" class="s-heading">Simple from<br/>the start.</h2>
+        <span class="s-label">How it works</span>
+        <h2 id="process-heading" class="s-heading">Three steps to<br/>a better swing.</h2>
       </div>
-      <p class="s-sub reveal d1">Whether you've never held a club or you're shaving strokes off a single-digit handicap — the path forward is the same.</p>
+      <p class="s-sub reveal d1">First time holding a club or chasing a single-digit handicap — every student starts the same way.</p>
     </div>
     <div class="process-steps">
       <div class="process-step reveal">
-        <div class="step-num">01</div>
-        <div class="step-line"></div>
-        <div class="step-title">Book Your Session</div>
-        <div class="step-desc">Reserve online in under two minutes. Choose your coach, pick your service, and find a time that works. Walk-ins are always welcome when coaches are available.</div>
+        <div class="step-top"><div class="step-num">01</div><span class="step-chip">Under 2 min</span></div>
+        <div class="step-title">Book online</div>
+        <div class="step-desc">Pick your coach, your lesson, and a time that fits. Walk-ins are welcome whenever a coach is free.</div>
       </div>
       <div class="process-step reveal d2">
-        <div class="step-num">02</div>
-        <div class="step-line"></div>
-        <div class="step-title">Get on the Monitor</div>
-        <div class="step-desc">Your first session starts with a full data baseline — ball speed, launch angle, spin rate, smash factor. Your coach identifies the highest-leverage changes for your specific swing.</div>
+        <div class="step-top"><div class="step-num">02</div><span class="step-chip">First lesson</span></div>
+        <div class="step-title">Get your baseline</div>
+        <div class="step-desc">We measure your swing on the launch monitor — ball speed, launch angle, spin, smash factor — and pinpoint the one or two changes that matter most.</div>
       </div>
       <div class="process-step reveal d4">
-        <div class="step-num">03</div>
-        <div class="step-line"></div>
-        <div class="step-title">Track Real Progress</div>
-        <div class="step-desc">Every session produces numbers you can track and compare. You'll leave with specific drills, a clear improvement plan, and data that proves you're getting better.</div>
+        <div class="step-top"><div class="step-num">03</div><span class="step-chip">Every visit</span></div>
+        <div class="step-title">See the progress</div>
+        <div class="step-desc">Every session is measured. You leave with drills, a clear plan, and the numbers that prove you're getting better.</div>
+      </div>
+    </div>
+    <div class="process-cta reveal">
+      <p>Ready for step one? <span>Clubs provided — just bring yourself.</span></p>
+      <div class="process-cta-actions">
+        <a href="tel:+19154493613" class="phone">or call (915) 449-3613</a>
+        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=process" target="_blank" rel="noopener" class="btn-solid">Book your first lesson →</a>
       </div>
     </div>
   </section>
