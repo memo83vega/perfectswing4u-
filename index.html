@@ -1310,50 +1310,139 @@
       background: var(--forest);
       color: var(--white);
       padding: 7rem 5rem;
+      position: relative;
+      overflow: hidden;
     }
-    .tour-inner {
+    #tour::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 85% 0%, rgba(198,227,107,0.10) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .tour-wrap { position: relative; display: grid; gap: 1.25rem; }
+    .tour-head {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
-      gap: 4rem;
-      align-items: center;
+      gap: 3rem;
+      align-items: end;
+      margin-bottom: 1.75rem;
     }
     #tour .s-label { color: var(--gold); }
     #tour .s-heading { color: var(--white); margin-top: 0.5rem; }
-    #tour .s-sub { color: rgba(255,255,255,0.58); margin-top: 1.2rem; max-width: 460px; }
+    #tour .s-sub { color: rgba(255,255,255,0.58); max-width: 460px; }
+    .tour-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; margin-top: 1.6rem; }
     .tour-cta {
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
-      margin-top: 2.2rem;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--forest);
       background: var(--lime);
-      padding: 1rem 2.2rem;
+      padding: 0.95rem 1.8rem;
       border-radius: 2rem;
       transition: transform 0.2s, opacity 0.2s;
     }
     .tour-cta:hover { transform: translateY(-2px); opacity: 0.92; }
-    .tour-note { margin-top: 0.9rem; font-size: 0.75rem; color: rgba(255,255,255,0.4); }
-    .tour-list { display: grid; gap: 0.75rem; }
-    .tour-item {
+    .tour-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.76rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 0.9rem 1.5rem;
+      border-radius: 2rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .tour-ghost:hover { border-color: var(--lime); background: rgba(198,227,107,0.06); }
+    .tour-ghost svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    .tour-card {
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 1.2rem;
+      padding: 1.8rem;
+    }
+    .tour-card-label {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--lime);
       display: flex;
       align-items: center;
-      gap: 1rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 0.9rem;
-      padding: 1.1rem 1.3rem;
+      gap: 0.55rem;
     }
-    .tour-item svg {
-      width: 20px; height: 20px; flex-shrink: 0;
-      fill: none; stroke: var(--lime);
-      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+    .tour-card-label .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 4px rgba(198,227,107,0.18); }
+    .tour-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 1.25rem; }
+
+    /* Next stop */
+    .next-name { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin-top: 0.9rem; }
+    .next-where { color: rgba(255,255,255,0.6); font-size: 0.92rem; margin-top: 0.5rem; }
+    .countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-top: 1.6rem; }
+    .cd-box { background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.07); border-radius: 0.8rem; padding: 0.9rem 0.4rem; text-align: center; }
+    .cd-num { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+    .cd-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 0.4rem; }
+    .next-facts { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
+    .fact {
+      font-size: 0.74rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 2rem;
+      padding: 0.42rem 0.85rem;
+      white-space: nowrap;
     }
-    .tour-item b { display: block; font-size: 0.95rem; font-weight: 600; }
-    .tour-item span { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+    .fact.hot { border-color: rgba(198,227,107,0.5); color: var(--lime); }
+    .next-done { display: none; font-size: 1rem; color: rgba(255,255,255,0.7); margin-top: 1rem; }
+
+    /* Season schedule */
+    .sched { list-style: none; display: grid; gap: 0.15rem; margin-top: 1rem; }
+    .sched li {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr auto;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.75rem 0.4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .sched li:last-child { border-bottom: 0; }
+    .s-num {
+      width: 2.2rem; height: 2.2rem;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.8);
+    }
+    .s-name { font-size: 0.92rem; font-weight: 600; line-height: 1.25; }
+    .s-meta { font-size: 0.74rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem; }
+    .s-tag { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); white-space: nowrap; }
+    .sched li.done .s-num { background: rgba(255,255,255,0.1); border-color: transparent; color: var(--lime); }
+    .sched li.done .s-name { color: rgba(255,255,255,0.6); }
+    .sched li.next { background: rgba(198,227,107,0.07); border-radius: 0.8rem; border-bottom-color: transparent; }
+    .sched li.next .s-num { background: var(--lime); border-color: var(--lime); color: var(--forest); }
+    .sched li.next .s-tag { color: var(--lime); }
+
+    /* How it works */
+    .how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .how-step { display: flex; gap: 1rem; align-items: flex-start; }
+    .how-step svg { width: 22px; height: 22px; flex-shrink: 0; margin-top: 0.15rem; fill: none; stroke: var(--lime); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .how-step b { display: block; font-size: 0.98rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .how-step span { font-size: 0.82rem; line-height: 1.6; color: rgba(255,255,255,0.55); }
+
+    /* Sponsors */
+    .tour-sponsors { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 2rem; align-items: center; background: #0f0f0f; }
+    .tour-sponsors h3 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin-top: 0.8rem; }
+    .tour-sponsors p { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.65; margin-top: 0.6rem; }
+    .tour-sponsors img { width: 100%; max-width: 620px; justify-self: center; border-radius: 0.6rem; }
 
     /* ── INSTAGRAM ── */
     #instagram {
@@ -1902,9 +1991,14 @@
 
       /* INSTAGRAM */
       #tour { padding: 3.5rem 1.25rem; }
-      .tour-inner { grid-template-columns: 1fr; gap: 2.2rem; }
+      .tour-head, .tour-grid, .how, .tour-sponsors { grid-template-columns: 1fr; gap: 1rem; }
+      .tour-head { margin-bottom: 0.75rem; }
       #tour .s-heading { font-size: clamp(2rem, 8vw, 2.8rem); }
-      .tour-cta { display: flex; justify-content: center; }
+      .tour-actions { flex-direction: column; align-items: stretch; }
+      .tour-cta, .tour-ghost { justify-content: center; }
+      .tour-card { padding: 1.3rem; }
+      .cd-num { font-size: 1.6rem; }
+      .how { gap: 1.2rem; }
       #instagram { padding: 3.5rem 1.25rem; }
       .ig-header { flex-direction: column; align-items: flex-start; gap: 0.9rem; }
       .ig-placeholder { grid-template-columns: repeat(2, 1fr); }
@@ -2518,28 +2612,91 @@
 
   <!-- TOUR -->
   <section id="tour" aria-labelledby="tour-heading">
-    <div class="tour-inner">
-      <div class="reveal">
-        <span class="s-label">PS4U Golf Tour</span>
-        <h2 id="tour-heading" class="s-heading">Compete.<br/>Track every stop.</h2>
-        <p class="s-sub">Our local tour brings El Paso golfers together for competitive stops across the region. Follow live scores during each event, see where you stand for the season, and check the full roster.</p>
-        <a href="https://claude.ai/artifact/VrkXgzvJn73yQEXkBgnB9P" target="_blank" rel="noopener" class="tour-cta">Live Scores &amp; Standings →</a>
-        <p class="tour-note">Opens the live scoreboard in a new tab. Scores update in real time during each stop.</p>
+    <div class="tour-wrap">
+
+      <div class="tour-head">
+        <div class="reveal">
+          <span class="s-label">PS4U Golf Tour · 2026 Season</span>
+          <h2 id="tour-heading" class="s-heading">Compete.<br/>Track every stop.</h2>
+        </div>
+        <div class="reveal d1">
+          <p class="s-sub">Five stops across El Paso's best courses. Play in your flight, earn Order of Merit points at every stop, and follow live scores as they come in. No membership required.</p>
+          <div class="tour-actions">
+            <a href="sms:+19154493613?&amp;body=TOUR" class="tour-cta">Text TOUR to Register →</a>
+            <a href="https://claude.ai/artifact/VrkXgzvJn73yQEXkBgnB9P" target="_blank" rel="noopener" class="tour-ghost">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              Live Scores
+            </a>
+            <a href="https://www.instagram.com/ps4ugolftour/" target="_blank" rel="noopener" class="tour-ghost" aria-label="Follow @ps4ugolftour on Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.8"/></svg>
+              @ps4ugolftour
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="tour-list reveal d2">
-        <div class="tour-item">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          <div><b>Live leaderboard</b><span>Follow every stop as scores come in</span></div>
+
+      <div class="tour-grid">
+        <!-- Next stop (filled in by script from the schedule below) -->
+        <div class="tour-card reveal" id="next-stop">
+          <div class="tour-card-label"><span class="dot"></span><span id="next-label">Next stop</span></div>
+          <div class="next-name" id="next-name">Butterfield Trail Open</div>
+          <div class="next-where" id="next-where">Butterfield Trail Golf Club · Saturday, October 24</div>
+          <div class="countdown" id="countdown" aria-label="Countdown to the next stop">
+            <div class="cd-box"><div class="cd-num" data-cd="d">--</div><div class="cd-lbl">Days</div></div>
+            <div class="cd-box"><div class="cd-num" data-cd="h">--</div><div class="cd-lbl">Hours</div></div>
+            <div class="cd-box"><div class="cd-num" data-cd="m">--</div><div class="cd-lbl">Min</div></div>
+            <div class="cd-box"><div class="cd-num" data-cd="s">--</div><div class="cd-lbl">Sec</div></div>
+          </div>
+          <div class="next-facts">
+            <span class="fact hot">$130 entry</span>
+            <span class="fact">Flights A–D</span>
+            <span class="fact">No membership required</span>
+            <span class="fact" id="next-extra">Register by Oct 15</span>
+          </div>
+          <p class="next-done" id="next-done">That's a wrap on the 2026 season — thanks to every player and sponsor. Check the final standings on the live scoreboard.</p>
         </div>
-        <div class="tour-item">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>
-          <div><b>Season standings</b><span>Points race across all tour stops</span></div>
-        </div>
-        <div class="tour-item">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <div><b>Stops &amp; roster</b><span>Upcoming events, courses, and players</span></div>
+
+        <!-- Season schedule -->
+        <div class="tour-card reveal d2">
+          <div class="tour-card-label">2026 Schedule</div>
+          <ol class="sched" id="sched">
+            <li data-date="2026-08-29"><span class="s-num">1</span><div><div class="s-name">Opening Event</div><div class="s-meta">Painted Dunes · Aug 29</div></div><span class="s-tag"></span></li>
+            <li data-date="2026-10-03"><span class="s-num">2</span><div><div class="s-name">MC Environmental Solutions Open</div><div class="s-meta">Sonoma Ranch · Oct 3</div></div><span class="s-tag"></span></li>
+            <li data-date="2026-10-24" data-name="Butterfield Trail Open" data-where="Butterfield Trail Golf Club · Saturday, October 24" data-extra="Register by Oct 15"><span class="s-num">3</span><div><div class="s-name">Butterfield Trail Open</div><div class="s-meta">Butterfield Trail · Oct 24</div></div><span class="s-tag"></span></li>
+            <li data-date="2026-11-07" data-name="Stop 4 · Lone Star" data-where="Lone Star · Saturday, November 7" data-extra="Text TOUR to register"><span class="s-num">4</span><div><div class="s-name">Stop 4</div><div class="s-meta">Lone Star · Nov 7</div></div><span class="s-tag"></span></li>
+            <li data-date="2026-12-05" data-name="Stop 5 · Horizon" data-where="Horizon · Saturday, December 5" data-extra="Text TOUR to register"><span class="s-num">5</span><div><div class="s-name">Stop 5</div><div class="s-meta">Horizon · Dec 5</div></div><span class="s-tag"></span></li>
+          </ol>
         </div>
       </div>
+
+      <!-- How it works -->
+      <div class="tour-card reveal">
+        <div class="how">
+          <div class="how-step">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <div><b>Play your flight</b><span>Flights A–D are set by handicap index, so you compete against golfers at your level.</span></div>
+          </div>
+          <div class="how-step">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <div><b>Enter any stop</b><span>$130 per stop, no membership needed. Text TOUR to (915) 449-3613 to save your spot.</span></div>
+          </div>
+          <div class="how-step">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>
+            <div><b>Climb the Order of Merit</b><span>Earn points at every stop and follow the season standings live, all year long.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sponsors -->
+      <div class="tour-card tour-sponsors reveal">
+        <div>
+          <div class="tour-card-label">Tour sponsors</div>
+          <h3>The businesses behind the tour.</h3>
+          <p>Thank you to the local partners who make the PS4U Golf Tour possible. Interested in sponsoring a stop? Call <a href="tel:+19154493613" style="color:var(--lime)">(915) 449-3613</a>.</p>
+        </div>
+        <img src="public/images/tour/sponsors.png" alt="PS4U Golf Tour sponsors: Diana Wilson Realtor, MC Environmental Solutions, Allstate Sofia Machuca Agency, Another Broken Egg Cafe, and Clasico Kitchen &amp; Bar" width="720" height="360" loading="lazy" />
+      </div>
+
     </div>
   </section>
 
@@ -2888,6 +3045,49 @@
         clearTimeout(rt);
         rt = setTimeout(() => { if (ready) { sizeCanvas(); current = -1; render(); } }, 150);
       });
+    })();
+
+    /* ── TOUR: next stop + countdown from the schedule ─── */
+    (function () {
+      const items = [...document.querySelectorAll('#sched li')];
+      if (!items.length) return;
+      // Treat each stop as "done" once its day has passed (local time).
+      const endOf = d => new Date(d + 'T23:59:59');
+      const startOf = d => new Date(d + 'T08:00:00');
+      const now = new Date();
+      let next = null;
+      items.forEach(li => {
+        const tag = li.querySelector('.s-tag');
+        if (endOf(li.dataset.date) < now) { li.classList.add('done'); tag.textContent = 'Final'; li.querySelector('.s-num').textContent = '✓'; }
+        else if (!next) { next = li; li.classList.add('next'); tag.textContent = 'Next'; }
+        else { tag.textContent = 'Upcoming'; }
+      });
+      const card = document.getElementById('next-stop');
+      if (!next) {
+        document.getElementById('next-label').textContent = 'Season complete';
+        document.getElementById('next-name').textContent = '2026 PS4U Golf Tour';
+        document.getElementById('next-where').textContent = 'Five stops · Order of Merit';
+        document.getElementById('countdown').style.display = 'none';
+        card.querySelector('.next-facts').style.display = 'none';
+        document.getElementById('next-done').style.display = 'block';
+        return;
+      }
+      document.getElementById('next-label').textContent = 'Next stop · Stop ' + (items.indexOf(next) + 1) + ' of ' + items.length;
+      if (next.dataset.name) document.getElementById('next-name').textContent = next.dataset.name;
+      if (next.dataset.where) document.getElementById('next-where').textContent = next.dataset.where;
+      const extra = document.getElementById('next-extra');
+      if (next.dataset.extra) extra.textContent = next.dataset.extra; else extra.remove();
+      const target = startOf(next.dataset.date);
+      const el = k => card.querySelector('[data-cd="' + k + '"]');
+      const pad = n => String(n).padStart(2, '0');
+      function tick() {
+        let ms = Math.max(0, target - new Date());
+        const d = Math.floor(ms / 864e5); ms -= d * 864e5;
+        const h = Math.floor(ms / 36e5);  ms -= h * 36e5;
+        const m = Math.floor(ms / 6e4);   ms -= m * 6e4;
+        el('d').textContent = d; el('h').textContent = pad(h); el('m').textContent = pad(m); el('s').textContent = pad(Math.floor(ms / 1000));
+      }
+      tick(); setInterval(tick, 1000);
     })();
 
     /* ── STICKY MOBILE BOOK CTA (show after hero) ──────── */
